@@ -4,7 +4,7 @@ class Scraper
 		@list = []
 	end
 
-	def scrape
+	def game_list
 		i = 0
 		while i <= 31
 			i += 1
@@ -13,4 +13,17 @@ class Scraper
 		end	
 		@list.flatten!
 	end
+
+	def genre_list
+
+	end
 end
+
+	# @objectlist = []
+	# @list.each do |name|
+	# 	@objectlist << Gameobject.new(name)
+	# end
+
+	# @objectlist.each do |gameobject|
+	# 	gameobject.genre = "horror" if @horror.include? gameobject.name
+	# end
