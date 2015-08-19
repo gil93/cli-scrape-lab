@@ -57,6 +57,6 @@ end
 	# 	gameobject.genre = "horror" if @horror.include? gameobject.name
 	# end
 
-new_pro = Scraper.new
+new_pro = Scraper.new #___
 new_pro.game_list
 new_pro.genre_list
