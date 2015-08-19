@@ -1,11 +1,11 @@
-require 'pry'
-require 'json'
-require 'nokogiri'
-require 'open-uri'
-require 'rest-client'
-require 'rubygems'
+# require 'pry'
+# require 'json'
+# require 'nokogiri'
+# require 'open-uri'
+# require 'rest-client'
+# require 'rubygems'
 
-require_relative '../models/game.rb'
+# require_relative '../models/game.rb'
 
 class Scraper
 
@@ -14,6 +14,10 @@ class Scraper
 		@game_list = []
 		@genre_list = {}
 		@genre_type = []
+	end
+
+	def game_object_list
+		@game_object_list
 	end
 
 	def genre_type
@@ -38,13 +42,14 @@ class Scraper
 			@genre_list[@games.css("select[id='game_filter_type_genres']").css("option[value='" + "#{i}" + "']").text.to_sym] ||= @genres.css("h3.media-title").children.collect { |o| o.text} 
 		end
 		@game_object_list.each do |game|
-			@genre_list.each do |genre_type, genre_games|
-				game.genre << "#{genre_type.to_s.capitalize}" if genre_games.include? game.name
-				@genre_type << genre_type
+			@genre_list.each do |genre_types, genre_games|
+				game.genre << "#{genre_types.to_s.capitalize}" if genre_games.include? game.name	
 			end
 		end
+		@genre_list.each do |g_types, g_games|
+			@genre_type << g_types.to_s
+		end
 		@game_object_list.each { |g| g.genre = "N/A" if g.genre == [] }
-		binding.pry
 	end	
 end
 
@@ -57,6 +62,3 @@ end
 	# 	gameobject.genre = "horror" if @horror.include? gameobject.name
 	# end
 
-new_pro = Scraper.new
-new_pro.game_list
-new_pro.genre_list
