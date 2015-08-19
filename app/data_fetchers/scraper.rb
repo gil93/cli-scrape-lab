@@ -13,6 +13,11 @@ class Scraper
 		@game_object_list = []
 		@game_list = []
 		@genre_list = {}
+		@genre_type = []
+	end
+
+	def genre_type
+		@genre_type
 	end
 
 	def game_list
@@ -35,6 +40,7 @@ class Scraper
 		@game_object_list.each do |game|
 			@genre_list.each do |genre_type, genre_games|
 				game.genre << "#{genre_type.to_s.capitalize}" if genre_games.include? game.name
+				@genre_type << genre_type
 			end
 		end
 		@game_object_list.each { |g| g.genre = "N/A" if g.genre == [] }
